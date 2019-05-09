@@ -4,6 +4,10 @@
 L'idée est de déployer une batterie de tests unitaires sur ce jeu du Simon 
 créé en Javascript, dans un environnement Node/Express, avec Mocha et Chai.
 
+## Installation
+
+npm install
+
 ## Fichiers intéressants
 
 - /test/test.js 
