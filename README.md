@@ -2,16 +2,15 @@
 # Tests unitaires JS
 
 L'idée est de déployer une batterie de tests unitaires sur ce jeu du Simon 
-créé en Javascript, dans un environnement Node/Express.
+créé en Javascript, dans un environnement Node/Express, avec Mocha et Chai.
 
-## A réaliser
+## Fichiers intéressants
 
-- cloner ce dépôt
-- npm install (notez que mocha est inclus dans le package.json)
-- créez un dossier test à la racine du projet
-- créez votre batterie de tests, relatifs aux codes du backend, puis du frontend
-  - le back est dans /routes/simon.js
-  - le front est dans /public/javascripts/app.js
+- /test/test.js 
+  (à exécuter avec npm test)
+- /public/javascripts/test.js 
+  (à exécuter en visitant le site, lancé avec npm start)
+
 
 ## Documentation
 
@@ -20,3 +19,13 @@ L'environnement de développement a été mis en oeuvre avec le générateur d'E
 
 La doc de Mocha (RTFM) :
 - https://mochajs.org/#getting-started
+
+Un tuto sur Mocha :
+- https://blog.logrocket.com/a-quick-and-complete-guide-to-mocha-testing-d0e0ea09f09d
+
+Behaviour Driven Development :
+- https://www.arolla.fr/blog/2012/06/bdd-c-est-quoi-donc/
+
+Problème d'accès au DOM depuis la console :
+- https://stackoverflow.com/questions/48331488/using-chai-to-test-value-of-html-element
+

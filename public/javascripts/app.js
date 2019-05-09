@@ -3,11 +3,23 @@
 /*
     initialisation du jeux
 */
+
+// Si le jeu est en train de jouer une séquence,
+// cette variable est à true.
+var joue = false;
+
+// La séquence du joueur en cours de sélection
+// est stockée dans cette variable globale.
+var clique = [];
+
+
 function demarrer(){
     $.ajax('/simon/start').done(jouer);
 }
 
-demarrer();
+$('#middle').on('click', function(e){
+    demarrer();
+});
 
 
 
@@ -15,46 +27,34 @@ demarrer();
     Jouer la séquence
 */
 function jouer(){
-    $.ajax('/simon/next').done(function(arr){
+    joue = true;
+    clique = [];
 
+    $.ajax('/simon/next').done(function(arr){
         for(var i=0 ; i<arr.length ; i++){
             clignoter(arr[i], i);
         }
-
-        ecouter();
+        // Passé le délai de jeu, le joueur pourra à nouveau
+        // cliquer les couleurs
+        setTimeout(function(){joue=false;}, 1000*i);
     });
 }
 
 
 
 /*
-    Cette fonction active un listener sur les blocs de couleurs
+    Cet événement active un listener sur les blocs de couleurs
     et retourne true si la séquence saisie correspond aux couleurs
     stockées dans la variable globale "sequence".
 */
-function ecouter(){
-    var clique = [];
-    $('#simon>div').on('click', function(){
-        clique.push( $(this).attr('id') );
+$('#simon>div:not(#middle)').on('click', function(){
+    // impossible de cliquer les couleurs si le jeu est
+    // en train d'afficher la séquence de couleurs
+    if(joue) return;
 
-        comparer(clique);
-        /* ){
-            case -1:
-                alert('Perdu, on recommence !');
-                demarrer();
-                break;
-
-            case 1:
-                $('#simon>div').off('click');
-                jouer();
-                break;
-
-            case 0:
-            default: // rien
-        }
-        */
-    });
-}
+    clique.push( $(this).attr('id') );
+    comparer(clique);
+});
 
 
 
@@ -73,38 +73,18 @@ function comparer(clique){
 
         if( resultat=='OK' && clique.length==10 ){
             alert('Gagné !');
-            $('#simon>div').off('click');
             demarrer();
-            return;
         }
 
-        if( resultat=='OK' ){
-            $('#simon>div').off('click');
+        if( resultat=='OK' && clique.length!=10 ){
             jouer();
         }
 
         if( resultat=='ko' ){
             alert('Perdu !');
-            $('#simon>div').off('click');
             demarrer();
         }
     });
-/*
-    if( clique.length > sequence.length ){
-        return -1;
-    }
-
-    if( clique.length < sequence.length ){
-        return 0;
-    }
-
-    for(var i=0 ; i<sequence.length ; i++){
-        if( clique[i] != sequence[i] ){
-            return 0;
-        }
-    }
-    return 1;
-*/
 }
 
 
@@ -112,10 +92,10 @@ function comparer(clique){
 /*
     Faire clignoter un block de couleur. Le second paramètre définit
     dans combien de secondes le clignotement interviendra (sachant
-        qu'un clignotement dure 1 seconde).
+    qu'un clignotement dure 1 seconde).
 */
-function clignoter(couleur, secondes){
+function clignoter(couleur, délai){
     setTimeout(function(){
-        $('#'+couleur).fadeOut(500).fadeIn(500); 
-    }, 1000*secondes);
+        $('#'+couleur).fadeOut(500).fadeIn(500);
+    }, 1000*délai);
 }

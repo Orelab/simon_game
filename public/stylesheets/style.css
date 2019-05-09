@@ -1,8 +1,9 @@
 body {
-  padding: 50px;
+  padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: black;
   color: lightgray;
+  display: flex;
 }
 
 a {
@@ -12,38 +13,68 @@ a {
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
+}
+
+.column {
+  flex: 1 1 300px;
 }
 
 #simon {
-  width: 512px;
-  height: 512px;
   line-height: 0;
-  margin: auto;
+  position: relative;
 }
 
 #simon div {
-  width: 250px;
-  height: 250px;
-  margin: 3px;
+  width: calc(50% - 20px);
+  margin: 10px;
   display: inline-block;
+  cursor: pointer;
 }
 
-#rouge {
-  background-color: red;
-  border-top-left-radius: 120px;
-}
-
-#bleu {
-  background-color: blue;
-  border-top-right-radius: 120px;
+#simon div:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+  height: 100%;
 }
 
 #vert {
-  background-color: green;
-  border-bottom-left-radius: 120px;
+  background-color: #56db66;
+  border-top-left-radius: 1000px;
+}
+
+#rouge {
+  background-color: #fa2e16;
+  border-top-right-radius: 1000px;
 }
 
 #jaune {
-  background-color: yellow;
-  border-bottom-right-radius: 120px;
+  background-color: #fff939;
+  border-bottom-left-radius: 1000px;
+}
+
+#bleu {
+  background-color: #00a7ee;
+  border-bottom-right-radius: 1000px;
+}
+
+#middle {
+  position: absolute;
+  width: calc(50% -20px);
+  height: calc(50% - 20px);
+  border-radius: 50%;
+  top: 25%;
+  left: 25%;
+  background: url("../images/simon.jpg") black center center no-repeat;
+  background-size: 205%;
+  cursor: auto !important;
+}
+
+
+@media screen and (max-width: 800px) {
+  body {
+    flex-direction: column;
+    padding-top: 80px;
+  }
 }

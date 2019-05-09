@@ -1,13 +1,28 @@
 extends layout
 
-block content
-  h1= title
-  //p Welcome to #{title}
 
-  div#simon
-    #rouge
-    #bleu
+block content
+  #simon
     #vert
+    #rouge
     #jaune
-  
+    #bleu
+    #middle
+
+  script(type='text/javascript', src='/javascripts/jquery.min.js')
+  script(type='text/javascript', src='/javascripts/app.js')
+
+
+block test
+  #mocha
+
+  link(rel='stylesheet', href='/stylesheets/mocha.css')
+  script(type='text/javascript', src='/javascripts/mocha.js')
+  script(type='text/javascript', src='/javascripts/chai.js')
+  script(type='text/javascript', src='/javascripts/chai-http.js')
+  script(type='text/javascript', src='/javascripts/chai-dom.js')
+  script(type='text/javascript', src='/javascripts/chai-jquery.js')
+  script(type='text/javascript', src='/javascripts/test.js')
+
+
 
